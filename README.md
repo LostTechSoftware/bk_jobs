@@ -7,7 +7,7 @@
   </a>
   
 
-  <h3 align="center">FoodZilla Back-end Template</h3>
+  <h3 align="center">FoodZilla Back-end Jobs</h3>
 
   <p align="center">
     <a href="https://bk.foodzilla.com.br">Produção</a>
@@ -24,7 +24,7 @@
 ### 🔔 About the project
 
 
-Esse é o template do backend da plataforma Foodzilla.
+Projeto voltado em rodar workers em determinados momentos dos dias para que possamos controlar os jobs.
 
 ### 🛠️ Built With
 
