@@ -9,6 +9,6 @@ mongoose.connect(process.env.MONGO_URL, {
 })
 mongoose.Promise = global.Promise
 
-infoHandler(`Banco de dados conectado: ${process.env.PROD === true ? 'Produção' : 'Staging'}`)
+infoHandler(`Banco de dados conectado: ${process.env.NODE_ENV === true ? 'Produção' : 'Staging'}`)
 
 module.exports = mongoose

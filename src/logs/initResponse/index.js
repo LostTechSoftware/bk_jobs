@@ -1,8 +1,9 @@
+/* eslint prefer-rest-params: "off" */
 const { infoHandler } = require('..')
 
 module.exports = (app) => {
   function modifyResponseBody(req, res, next) {
-    var oldSend = res.send
+    const oldSend = res.send
 
     res.send = function (data) {
       infoHandler(data)

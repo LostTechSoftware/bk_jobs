@@ -1,5 +1,5 @@
-const { infoHandler } = require('..')
 const { v4: uuidv4 } = require('uuid')
+const { infoHandler } = require('..')
 
 module.exports = (app) => {
   app.all('*', (req, res, next) => {
