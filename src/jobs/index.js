@@ -1,6 +1,7 @@
 const { initBoletosCreate } = require('./BoletoCreate')
 const { initFindOrders } = require('./FindOrders')
 const { initInitalizeModeration } = require('./InitializeModeration')
+const { initPartnerSales } = require('./PartnerSales')
 const { initProductCount } = require('./ProductCount')
 const { initProductSchedule } = require('./ProductSchedule')
 const { initRevenueCity } = require('./RevenueCity')
@@ -16,6 +17,7 @@ function initJobs() {
   initSendNotificationScheduled()
   initStoryFunction()
   initInitalizeModeration()
+  initPartnerSales()
 }
 
 module.exports = { initJobs }
