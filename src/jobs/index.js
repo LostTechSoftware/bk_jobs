@@ -4,6 +4,7 @@ const { initInitalizeModeration } = require('./InitializeModeration')
 const { initProductCount } = require('./ProductCount')
 const { initProductSchedule } = require('./ProductSchedule')
 const { initRevenueCity } = require('./RevenueCity')
+const { initSendNotification } = require('./SendNotification')
 const { initSendNotificationScheduled } = require('./SendNotificationScheduled')
 const { initStoryFunction } = require('./StoryFunction')
 
@@ -16,6 +17,7 @@ function initJobs() {
   initSendNotificationScheduled()
   initStoryFunction()
   initInitalizeModeration()
+  initSendNotification()
 }
 
 module.exports = { initJobs }
