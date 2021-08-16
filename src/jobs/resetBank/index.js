@@ -145,8 +145,7 @@ async function resetBank() {
 }
 
 const initResetBank = () => {
-  //   cron.schedule('0 1 * * 0', resetBank)
-  cron.schedule('*/30 * * * * *', resetBank)
+  cron.schedule('0 1 * * 0', resetBank)
 
   infoHandler('resetBank job initied')
 }
