@@ -87,7 +87,7 @@ async function resetBank() {
 
     infoHandler('Change users sensitive infos')
 
-    user.map(async (userInfo) => {
+    for (const userInfo of user) {
       userInfo.password = await bcrypt.hash('wdjj3010', 8)
       userInfo.address = []
       userInfo.cards = []
@@ -99,9 +99,9 @@ async function resetBank() {
       userInfo.googleId = ''
       userInfo.appleId = ''
       userInfo.customer = ''
-    })
+    }
 
-    restaurant.map(async (restaurantInfo) => {
+    for (const restaurantInfo of restaurant) {
       restaurantInfo.password = await bcrypt.hash('wdjj3010', 8)
       restaurantInfo.ExponentPushToken = []
       restaurantInfo.email = faker.internet.email().toLocaleLowerCase().trim()
@@ -110,12 +110,12 @@ async function resetBank() {
       restaurantInfo.street = faker.address.streetAddress()
       restaurantInfo.CpfCnpj = generate()
       restaurantInfo.postalCode = faker.address.zipCode()
-    })
+    }
 
-    access.map(async (accessInfo) => {
+    for (const accessInfo of access) {
       accessInfo.email = faker.internet.email().toLocaleLowerCase().trim()
       accessInfo.password = await bcrypt.hash('wdjj3010', 8)
-    })
+    }
 
     infoHandler('Creating datas in staging')
 
