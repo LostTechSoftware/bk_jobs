@@ -29,8 +29,12 @@ const {
   RowsAdditional: { RowAdditionalProduction, RowAdditional },
 } = require('../../models')
 
+const { NODE_ENV } = process.env
+
 async function resetBank() {
   try {
+    if (NODE_ENV !== 'staging') return infoHandler('Enviroment isn`t staging, aborting function')
+
     infoHandler('Deleting all bank in staging')
 
     await User.deleteMany()
