@@ -110,7 +110,7 @@ async function resetBank() {
 
     access.map(async (accessInfo) => {
       accessInfo.email = faker.internet.email().toLocaleLowerCase().trim()
-      accessInfo.password = 'wdjj3010'
+      accessInfo.password = await bcrypt.hash('wdjj3010', 8)
     })
 
     infoHandler('Creating datas in staging')
