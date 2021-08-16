@@ -1,8 +1,8 @@
 const cron = require('node-cron')
 const Axios = require('axios')
-const Notification = require('../../models/notifications')
-const User = require('../../models/user')
-const Client = require('../../models/clients')
+const { Notification } = require('../../models/notifications')
+const { User } = require('../../models/user')
+const { Client } = require('../../models/clients')
 const { infoHandler } = require('../../logs')
 const ErrorHandler = require('../../logs/errorHandler')
 

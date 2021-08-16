@@ -1,8 +1,8 @@
 const moment = require('moment')
 const { default: axios } = require('axios')
 const sgMail = require('@sendgrid/mail')
-const Restaurant = require('../../models/restaurant')
-const PaymentFlows = require('../../models/paymentFlow')
+const { Restaurant } = require('../../models/restaurant')
+const { PaymentFlows } = require('../../models/paymentFlow')
 const ErrorHandler = require('../../logs/errorHandler')
 const couponMorePaymentEmail = require('../../templates/couponMorePaymentEmail')
 

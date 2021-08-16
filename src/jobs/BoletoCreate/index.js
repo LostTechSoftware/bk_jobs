@@ -1,10 +1,10 @@
 const cron = require('node-cron')
 const sgMail = require('@sendgrid/mail')
 const moment = require('moment')
-const Restaurant = require('../../models/restaurant')
+const { Restaurant } = require('../../models/restaurant')
 const { createdPaymentEmail } = require('../../templates')
 const generateNewPayment = require('../../services/Finance/generateNewPayment')
-const PaymentFlows = require('../../models/paymentFlow')
+const { PaymentFlows } = require('../../models/paymentFlow')
 const { infoHandler } = require('../../logs')
 const ErrorHandler = require('../../logs/errorHandler')
 

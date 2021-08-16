@@ -1,8 +1,8 @@
 const moment = require('moment')
 const ErrorHandler = require('../../logs/errorHandler')
-const Goals = require('../../models/goals')
-const PaymentFlows = require('../../models/paymentFlow')
-const Restaurant = require('../../models/restaurant')
+const { Goals } = require('../../models/goals')
+const { PaymentFlows } = require('../../models/paymentFlow')
+const { Restaurant } = require('../../models/restaurant')
 
 async function generateFinanceDetails(RestaurantId, order) {
   const restaurant = await Restaurant.findById(RestaurantId).select(

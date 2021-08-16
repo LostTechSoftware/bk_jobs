@@ -1,7 +1,7 @@
 const cron = require('node-cron')
 const sgMail = require('@sendgrid/mail')
-const Franchisees = require('../../models/franchisees')
-const City = require('../../models/citys')
+const { Franchisees } = require('../../models/franchisees')
+const { City } = require('../../models/citys')
 const { revenueCityFoodZillaEmail, revenueCityFranchiseeEmail } = require('../../templates')
 const { infoHandler, errorHandler } = require('../../logs')
 
