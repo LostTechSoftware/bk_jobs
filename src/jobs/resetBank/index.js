@@ -1,4 +1,5 @@
 const cron = require('node-cron')
+const axios = require('axios')
 const faker = require('faker')
 const bcrypt = require('bcryptjs')
 const { generate } = require('gerador-validador-cpf')
@@ -30,6 +31,28 @@ const {
 } = require('../../models')
 
 const { NODE_ENV } = process.env
+
+async function generateCustomer(restaurantInfo) {
+  const { name, cpfCnpj, email } = restaurantInfo
+
+  const { data } = await axios
+    .post(
+      `${process.env.ASAAS_URL}/customers`,
+      {
+        name,
+        cpfCnpj,
+        email,
+      },
+      {
+        headers: {
+          access_token: process.env.ASAAS,
+        },
+      }
+    )
+    .catch((err) => ErrorHandler(err.response.data))
+
+  return data
+}
 
 async function resetBank() {
   try {
@@ -92,7 +115,7 @@ async function resetBank() {
       userInfo.address = []
       userInfo.cards = []
       userInfo.DevicePushToken = ''
-      userInfo.ExponentPushToken = []
+      userInfo.ExponentPushToken = ''
       userInfo.email = faker.internet.email().toLocaleLowerCase().trim()
       userInfo.telephone = faker.phone.phoneNumber()
       userInfo.name = faker.name.findName()
@@ -102,13 +125,16 @@ async function resetBank() {
     }
 
     for (const restaurantInfo of restaurant) {
+      restaurantInfo.email = faker.internet.email().toLocaleLowerCase().trim()
+      restaurantInfo.CpfCnpj = generate()
+
+      const customer = await generateCustomer(restaurantInfo)
+
+      restaurantInfo.customer = customer.id
       restaurantInfo.password = await bcrypt.hash('wdjj3010', 8)
       restaurantInfo.ExponentPushToken = []
-      restaurantInfo.email = faker.internet.email().toLocaleLowerCase().trim()
       restaurantInfo.telephone = faker.phone.phoneNumber()
-      restaurantInfo.customer = ''
       restaurantInfo.street = faker.address.streetAddress()
-      restaurantInfo.CpfCnpj = generate()
       restaurantInfo.postalCode = faker.address.zipCode()
     }
 
