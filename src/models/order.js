@@ -1,6 +1,7 @@
 const crypto = require('crypto')
-const mongoose = require('../database')
+const mongoose = require('mongoose')
 const PointSchema = require('./utils/PointSchema')
+const { productionConnection, stagingConnection } = require('../database')
 
 const OrderSchema = new mongoose.Schema({
   createdAt: {
@@ -133,14 +134,16 @@ const OrderSchema = new mongoose.Schema({
   star: Number,
   expiresIn: Date,
   chargeId: String,
+  IP: String,
   status: {
     type: String,
     default: 'Aguardando aprovação',
   },
-  IP: String,
   couponUsed: Number,
+  DeliveriedAt: Date,
 })
 
-const Order = mongoose.model('Order', OrderSchema)
+const Order = stagingConnection.model('Order', OrderSchema)
+const OrderProduction = productionConnection.model('Order', OrderSchema)
 
-module.exports = Order
+module.exports = { Order, OrderProduction }

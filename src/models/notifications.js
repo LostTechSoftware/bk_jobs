@@ -1,4 +1,5 @@
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const NotificationSchema = new mongoose.Schema({
   CreatedAt: {
@@ -23,6 +24,7 @@ const NotificationSchema = new mongoose.Schema({
   },
 })
 
-const Notification = mongoose.model('Notification', NotificationSchema)
+const Notification = stagingConnection.model('Notification', NotificationSchema)
+const NotificationProduction = productionConnection.model('Notification', NotificationSchema)
 
-module.exports = Notification
+module.exports = { Notification, NotificationProduction }

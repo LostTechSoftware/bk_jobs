@@ -1,7 +1,7 @@
 const cron = require('node-cron')
 const { infoHandler } = require('../../logs')
 const ErrorHandler = require('../../logs/errorHandler')
-const Story = require('../../models/story')
+const { Story } = require('../../models/story')
 
 async function StoryFunction() {
   try {
