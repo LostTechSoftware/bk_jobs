@@ -18,8 +18,8 @@ function initJobs() {
   initSendNotificationScheduled()
   initStoryFunction()
   initInitalizeModeration()
-  initinitializeScrapping()
   initPartnerSales()
+  initinitializeScrapping()
 }
 
 module.exports = { initJobs }
