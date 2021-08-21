@@ -10,7 +10,8 @@
     "yarn": "<=1.22.10"
   },
   "os": [
-    "linux"
+    "linux",
+    "win32"
   ],
   "scripts": {
     "staging": "nodemon ./src/index.js",
