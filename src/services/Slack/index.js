@@ -1,11 +1,11 @@
-const SendPartnerSales = require("./SendPartnerSales");
+const SendPartnerSales = require('./SendPartnerSales')
 
 const SendSlackNotification = async (message, channel) => {
   const obj = {
     SendPartnerSales: SendPartnerSales(message),
-  };
+  }
 
-  return obj[channel] || null;
-};
+  return obj[channel] || null
+}
 
-module.exports = { SendSlackNotification };
+module.exports = { SendSlackNotification }
