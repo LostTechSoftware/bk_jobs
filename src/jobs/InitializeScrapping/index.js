@@ -7,7 +7,7 @@ async function initializeScrapping() {
   try {
     const { BACKEND_AUTHORIZATION } = process.env
     await axios
-      .post(
+      .get(
         process.env.NODE_ENV === 'production'
           ? `https://bk-scrapping.herokuapp.com/init`
           : `https://bk-scrapping-staging.herokuapp.com/init`,
