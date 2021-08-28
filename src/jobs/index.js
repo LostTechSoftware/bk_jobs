@@ -5,10 +5,13 @@ const { initPartnerSales } = require('./PartnerSales')
 const { initinitializeScrapping } = require('./InitializeScrapping')
 const { initProductCount } = require('./ProductCount')
 const { initProductSchedule } = require('./ProductSchedule')
+const { initResetBank } = require('./resetBank')
 const { initRevenueCity } = require('./RevenueCity')
 const { initSendNotification } = require('./SendNotification')
 const { initSendNotificationScheduled } = require('./SendNotificationScheduled')
 const { initStoryFunction } = require('./StoryFunction')
+
+const { NODE_ENV } = process.env
 
 function initJobs() {
   initBoletosCreate()
@@ -22,6 +25,11 @@ function initJobs() {
   initSendNotification()
   initPartnerSales()
   initinitializeScrapping()
+  initPartnerSales()
+
+  if (NODE_ENV === 'staging') {
+    initResetBank()
+  }
 }
 
 module.exports = { initJobs }

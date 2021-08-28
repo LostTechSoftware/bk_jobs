@@ -3,9 +3,9 @@ const moment = require('moment')
 const cron = require('node-cron')
 const Axios = require('axios')
 const Holidays = require('date-holidays')
-const Notification = require('../../models/notifications')
-const User = require('../../models/user')
-const Client = require('../../models/clients')
+const { Notification } = require('../../models/notifications')
+const { User } = require('../../models/user')
+const { Client } = require('../../models/clients')
 const { infoHandler } = require('../../logs')
 const ErrorHandler = require('../../logs/errorHandler')
 
@@ -118,8 +118,6 @@ async function SendNotification() {
       } else {
         infoHandler(`Skiping send notification, user dont has ExponentPushToken`)
       }
-
-      // Vamos ver se os devs estão revisando os PRs direito
 
       countUser = countUser + 1
       infoHandler(`Sended ${countUser}/${usersToSend}`)

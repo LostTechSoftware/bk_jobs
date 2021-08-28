@@ -1,5 +1,6 @@
 const aws = require('aws-sdk')
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const s3 = new aws.S3()
 
@@ -45,9 +46,8 @@ const ProductSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  labels: [],
 })
-
-const Product = mongoose.model('Product', ProductSchema)
 
 ProductSchema.virtual('avatar_url').get(function () {
   return `${process.env.APP_URL}/files/${this.Avatar}`
@@ -64,4 +64,7 @@ ProductSchema.pre('remove', function () {
   }
 })
 
-module.exports = Product
+const Product = stagingConnection.model('Product', ProductSchema)
+const ProductProduction = productionConnection.model('Product', ProductSchema)
+
+module.exports = { Product, ProductProduction }

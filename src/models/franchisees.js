@@ -1,4 +1,5 @@
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const FranchiseesSchema = new mongoose.Schema({
   CreatedAt: {
@@ -14,6 +15,7 @@ const FranchiseesSchema = new mongoose.Schema({
   },
 })
 
-const Franchisees = mongoose.model('Franchisees', FranchiseesSchema)
+const Franchisees = stagingConnection.model('Franchisees', FranchiseesSchema)
+const FranchiseesProduction = productionConnection.model('Franchisees', FranchiseesSchema)
 
-module.exports = Franchisees
+module.exports = { Franchisees, FranchiseesProduction }

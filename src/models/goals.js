@@ -1,4 +1,5 @@
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const GoalsSchema = new mongoose.Schema({
   objective: { type: Number, default: 0 },
@@ -10,6 +11,7 @@ const GoalsSchema = new mongoose.Schema({
   },
 })
 
-const Goals = mongoose.model('Goals', GoalsSchema)
+const Goals = stagingConnection.model('Goals', GoalsSchema)
+const GoalsProduction = productionConnection.model('Goals', GoalsSchema)
 
-module.exports = Goals
+module.exports = { Goals, GoalsProduction }
