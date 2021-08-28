@@ -3470,7 +3470,7 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-express-http-context@^1.2.4:
+express-http-context@1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/express-http-context/-/express-http-context-1.2.4.tgz#49769d0e260836278996e728d9a3e7f3735f0531"
   integrity sha512-jPpBbF1MWWdRcUU1rxsX0CPnA8ueEj8xgWvpRGHoXWGI4l5KqhPY4Bq+Gt6s2IhqHQQ0g0wIvJ3jFfbUuJJycQ==
