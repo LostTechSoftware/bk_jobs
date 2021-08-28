@@ -1,6 +1,5 @@
 const cron = require('node-cron')
-const { infoHandler } = require('../../logs')
-const ErrorHandler = require('../../logs/errorHandler')
+const logs = require('../../logs')
 const { Story } = require('../../models/story')
 
 async function StoryFunction() {
@@ -19,14 +18,14 @@ async function StoryFunction() {
       await Story.findByIdAndDelete(s._id)
     })
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 
 const initStoryFunction = () => {
   cron.schedule('0 */1 * * *', StoryFunction)
 
-  infoHandler('StoryFunction job initied')
+  logs.info('StoryFunction job initied')
 }
 
 module.exports = { initStoryFunction }

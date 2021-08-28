@@ -3,8 +3,7 @@ const axios = require('axios')
 const faker = require('faker')
 const bcrypt = require('bcryptjs')
 const { generate } = require('gerador-validador-cpf')
-const ErrorHandler = require('../../logs/errorHandler')
-const infoHandler = require('../../logs/infoHandler')
+const logs = require('../../logs')
 const {
   User: { UserProduction, User },
   Access: { AccessProduction, Access },
@@ -49,16 +48,16 @@ async function generateCustomer(restaurantInfo) {
         },
       }
     )
-    .catch((err) => ErrorHandler(err.response.data))
+    .catch((err) => logs.error(err.response.data))
 
   return data
 }
 
 async function resetBank() {
   try {
-    if (NODE_ENV !== 'staging') return infoHandler('Enviroment isn`t staging, aborting function')
+    if (NODE_ENV !== 'staging') return logs.info('Enviroment isn`t staging, aborting function')
 
-    infoHandler('Deleting all bank in staging')
+    logs.info('Deleting all bank in staging')
 
     await User.deleteMany()
     await Access.deleteMany()
@@ -83,7 +82,7 @@ async function resetBank() {
     await RowAdditional.deleteMany()
     await Categories.deleteMany()
 
-    infoHandler('Get production bank info')
+    logs.info('Get production bank info')
 
     const user = await UserProduction.find()
     const access = await AccessProduction.find()
@@ -108,7 +107,7 @@ async function resetBank() {
     const rowadditional = await RowAdditionalProduction.find()
     const categories = await CategoriesProduction.find()
 
-    infoHandler('Change users sensitive infos')
+    logs.info('Change users sensitive infos')
 
     for (const userInfo of user) {
       userInfo.password = await bcrypt.hash('wdjj3010', 8)
@@ -143,7 +142,7 @@ async function resetBank() {
       accessInfo.password = await bcrypt.hash('wdjj3010', 8)
     }
 
-    infoHandler('Creating datas in staging')
+    logs.info('Creating datas in staging')
 
     await User.insertMany(user)
     await Access.insertMany(access)
@@ -168,16 +167,16 @@ async function resetBank() {
     await RowAdditional.insertMany(rowadditional)
     await Categories.insertMany(categories)
 
-    infoHandler('Database reinitied successfully')
+    logs.info('Database reinitied successfully')
   } catch (error) {
-    ErrorHandler('error')
+    logs.error('error')
   }
 }
 
 const initResetBank = () => {
   cron.schedule('0 1 * * 0', resetBank)
 
-  infoHandler('resetBank job initied')
+  logs.info('resetBank job initied')
 }
 
 module.exports = { initResetBank }
