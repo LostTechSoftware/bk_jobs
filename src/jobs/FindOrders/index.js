@@ -2,6 +2,7 @@ const cron = require('node-cron')
 const Axios = require('axios')
 const { Order } = require('../../models/order')
 const logs = require('../../logs')
+const getRequestId = require('../../getRequestId')
 
 async function FindOrders() {
   try {
@@ -19,7 +20,8 @@ async function FindOrders() {
               : `https://staging-bk.foodzilla.com.br/reject/order/${order._id}`,
             {
               reason: 'Restaurante demorou a aceitar o pedido',
-            }
+            },
+            { headers: { request_id: getRequestId() } }
           ).catch((err) => logs.error(err.response.data))
         }
       }

@@ -8,6 +8,7 @@ const { User } = require('../../models/user')
 const { Client } = require('../../models/clients')
 const { infoHandler } = require('../../logs')
 const logs = require('../../logs')
+const getRequestId = require('../../getRequestId')
 
 const hd = new Holidays('BR')
 
@@ -80,7 +81,11 @@ async function SendNotification() {
       logs.info(`Get suggestion on bk_ai for ${u.name}`)
       const {
         data: { food, drink },
-      } = await axios.post(`${BK_AI_URL}/get/user`, { UserId: u._id }, { headers: { Authorization: BK_AI_AUTHORIZATION } })
+      } = await axios.post(
+        `${BK_AI_URL}/get/user`,
+        { UserId: u._id },
+        { headers: { Authorization: BK_AI_AUTHORIZATION, request_id: getRequestId() } }
+      )
 
       const index = Math.floor(Math.random() * texts().length)
 
