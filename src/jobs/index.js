@@ -1,6 +1,7 @@
 const { initBoletosCreate } = require('./BoletoCreate')
 const { initFindOrders } = require('./FindOrders')
 const { initInitalizeModeration } = require('./InitializeModeration')
+const { initPartnerSales } = require('./PartnerSales')
 const { initinitializeScrapping } = require('./InitializeScrapping')
 const { initProductCount } = require('./ProductCount')
 const { initProductSchedule } = require('./ProductSchedule')
@@ -19,6 +20,7 @@ function initJobs() {
   initStoryFunction()
   initInitalizeModeration()
   initSendNotification()
+  initPartnerSales()
   initinitializeScrapping()
 }
 
