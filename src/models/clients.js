@@ -1,4 +1,5 @@
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const ClientSchema = new mongoose.Schema({
   CreatedAt: {
@@ -12,6 +13,7 @@ const ClientSchema = new mongoose.Schema({
   },
 })
 
-const Client = mongoose.model('Client', ClientSchema)
+const Client = stagingConnection.model('Client', ClientSchema)
+const ClientProduction = productionConnection.model('Client', ClientSchema)
 
-module.exports = Client
+module.exports = { Client, ClientProduction }

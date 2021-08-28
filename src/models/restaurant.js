@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const aws = require('aws-sdk')
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const s3 = new aws.S3()
 const PointSchema = require('./utils/PointSchema')
@@ -204,6 +205,7 @@ RestaurantSchema.pre('remove', function () {
     .promise()
 })
 
-const Restaurant = mongoose.model('Restaurant', RestaurantSchema)
+const Restaurant = stagingConnection.model('Restaurant', RestaurantSchema)
+const RestaurantProduction = productionConnection.model('Restaurant', RestaurantSchema)
 
-module.exports = Restaurant
+module.exports = { Restaurant, RestaurantProduction }

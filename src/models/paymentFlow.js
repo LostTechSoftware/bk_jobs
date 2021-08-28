@@ -1,4 +1,5 @@
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const PaymentFlowsSchema = new mongoose.Schema({
   referenceMonth: { type: Number, default: 0 },
@@ -15,6 +16,7 @@ const PaymentFlowsSchema = new mongoose.Schema({
   paid: { type: Boolean, default: false },
 })
 
-const PaymentFlows = mongoose.model('PaymentFlows', PaymentFlowsSchema)
+const PaymentFlows = stagingConnection.model('PaymentFlows', PaymentFlowsSchema)
+const PaymentFlowsProduction = productionConnection.model('PaymentFlows', PaymentFlowsSchema)
 
-module.exports = PaymentFlows
+module.exports = { PaymentFlows, PaymentFlowsProduction }
