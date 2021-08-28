@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { infoHandler } = require('../logs')
+const logs = require('../logs')
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -9,6 +9,6 @@ mongoose.connect(process.env.MONGO_URL, {
 })
 mongoose.Promise = global.Promise
 
-infoHandler(`Banco de dados conectado: ${process.env.NODE_ENV === true ? 'Produção' : 'Staging'}`)
+logs.info(`Banco de dados conectado: ${process.env.NODE_ENV === true ? 'Produção' : 'Staging'}`)
 
 module.exports = mongoose

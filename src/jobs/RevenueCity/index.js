@@ -3,7 +3,7 @@ const sgMail = require('@sendgrid/mail')
 const Franchisees = require('../../models/franchisees')
 const City = require('../../models/citys')
 const { revenueCityFoodZillaEmail, revenueCityFranchiseeEmail } = require('../../templates')
-const { infoHandler, errorHandler } = require('../../logs')
+const logs = require('../../logs')
 
 async function RevenueCity() {
   try {
@@ -37,14 +37,14 @@ async function RevenueCity() {
       }
     })
   } catch (error) {
-    errorHandler(error)
+    logs.error(error)
   }
 }
 
 const initRevenueCity = () => {
   cron.schedule('* * * * *', RevenueCity)
 
-  infoHandler('RevenueCity job initied')
+  logs.info('RevenueCity job initied')
 }
 
 module.exports = { initRevenueCity }

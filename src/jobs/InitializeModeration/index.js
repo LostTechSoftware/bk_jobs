@@ -1,7 +1,6 @@
 const cron = require('node-cron')
 const { default: axios } = require('axios')
-const ErrorHandler = require('../../logs/errorHandler')
-const infoHandler = require('../../logs/infoHandler')
+const logs = require('../../logs')
 
 async function initalizeModeration() {
   try {
@@ -11,16 +10,16 @@ async function initalizeModeration() {
           ? `https://bk-moderation.herokuapp.com/`
           : `https://bk-moderation-staging.herokuapp.com/`
       )
-      .catch((err) => ErrorHandler(err.response.data))
+      .catch((err) => logs.error(err.response.data))
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 
 const initInitalizeModeration = () => {
   cron.schedule('0 */4 * * *', initalizeModeration)
 
-  infoHandler('initalizeModeration job initied')
+  logs.info('initalizeModeration job initied')
 }
 
 module.exports = { initInitalizeModeration }

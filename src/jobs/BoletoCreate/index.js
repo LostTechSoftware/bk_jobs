@@ -4,9 +4,8 @@ const moment = require('moment')
 const Restaurant = require('../../models/restaurant')
 const { createdPaymentEmail } = require('../../templates')
 const generateNewPayment = require('../../services/Finance/generateNewPayment')
-const PaymentFlows = require('../../models/paymentFlow')
-const { infoHandler } = require('../../logs')
-const ErrorHandler = require('../../logs/errorHandler')
+const { PaymentFlows } = require('../../models/paymentFlow')
+const logs = require('../../logs')
 
 async function BoletosCreate() {
   try {
@@ -52,14 +51,14 @@ async function BoletosCreate() {
       }
     })
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 
 const initBoletosCreate = () => {
   cron.schedule('* * * * *', BoletosCreate)
 
-  infoHandler('BoletosCreate job initied')
+  logs.info('BoletosCreate job initied')
 }
 
 module.exports = { initBoletosCreate }

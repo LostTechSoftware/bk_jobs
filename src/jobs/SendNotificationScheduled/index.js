@@ -3,8 +3,7 @@ const Axios = require('axios')
 const Notification = require('../../models/notifications')
 const User = require('../../models/user')
 const Client = require('../../models/clients')
-const { infoHandler } = require('../../logs')
-const ErrorHandler = require('../../logs/errorHandler')
+const logs = require('../../logs')
 
 async function SendNotificationScheduled() {
   try {
@@ -90,14 +89,14 @@ async function SendNotificationScheduled() {
       }
     })
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 
 const initSendNotificationScheduled = () => {
   cron.schedule('* * * * *', SendNotificationScheduled)
 
-  infoHandler('SendNotificationScheduled job initied')
+  logs.info('SendNotificationScheduled job initied')
 }
 
 module.exports = { initSendNotificationScheduled }

@@ -1,6 +1,6 @@
 const cron = require('node-cron')
-const { infoHandler, errorHandler } = require('../../logs')
-const Product = require('../../models/product')
+const logs = require('../../logs')
+const { Product } = require('../../models/product')
 
 async function ProductCount() {
   try {
@@ -12,14 +12,14 @@ async function ProductCount() {
       await p.save()
     })
   } catch (error) {
-    errorHandler(error)
+    logs.error(error)
   }
 }
 
 const initProductCount = () => {
   cron.schedule('0 */1 1 * *', ProductCount)
 
-  infoHandler('ProductCount job initied')
+  logs.info('ProductCount job initied')
 }
 
 module.exports = { initProductCount }
