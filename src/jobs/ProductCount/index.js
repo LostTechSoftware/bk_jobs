@@ -1,6 +1,6 @@
 const cron = require('node-cron')
 const { infoHandler, errorHandler } = require('../../logs')
-const Product = require('../../models/product')
+const { Product } = require('../../models/product')
 
 async function ProductCount() {
   try {

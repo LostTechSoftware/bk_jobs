@@ -1,6 +1,6 @@
 const cron = require('node-cron')
 const Axios = require('axios')
-const Order = require('../../models/order')
+const { Order } = require('../../models/order')
 const ErrorHandler = require('../../logs/errorHandler')
 const infoHandler = require('../../logs/infoHandler')
 

@@ -1,5 +1,6 @@
 const aws = require('aws-sdk')
-const mongoose = require('../database')
+const mongoose = require('mongoose')
+const { productionConnection, stagingConnection } = require('../database')
 
 const s3 = new aws.S3()
 
@@ -31,8 +32,6 @@ const StorySchema = new mongoose.Schema({
   status: { type: String, default: 'waiting_review' },
 })
 
-const Story = mongoose.model('Story', StorySchema)
-
 StorySchema.pre('remove', function () {
   if (this.image) {
     return s3
@@ -44,4 +43,7 @@ StorySchema.pre('remove', function () {
   }
 })
 
-module.exports = Story
+const Story = stagingConnection.model('Story', StorySchema)
+const StoryProduction = productionConnection.model('Story', StorySchema)
+
+module.exports = { Story, StoryProduction }
