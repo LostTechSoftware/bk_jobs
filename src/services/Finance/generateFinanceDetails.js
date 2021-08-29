@@ -1,5 +1,5 @@
 const moment = require('moment')
-const ErrorHandler = require('../../logs/errorHandler')
+const logs = require('../../logs')
 const { Goals } = require('../../models/goals')
 const { PaymentFlows } = require('../../models/paymentFlow')
 const { Restaurant } = require('../../models/restaurant')
@@ -32,7 +32,7 @@ async function generateFinanceDetails(RestaurantId, order) {
 
     await paymentFlow.save()
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 
   try {
@@ -43,7 +43,7 @@ async function generateFinanceDetails(RestaurantId, order) {
 
     await goals.save()
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 

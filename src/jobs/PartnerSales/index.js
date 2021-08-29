@@ -2,7 +2,7 @@ const moment = require('moment')
 const cron = require('node-cron')
 const Order = require('../../models/order')
 const Restaurant = require('../../models/restaurant')
-const { infoHandler } = require('../../logs')
+const logs = require('../../logs')
 const { SendSlackNotification } = require('../../services/Slack')
 
 async function PartnerSales() {
@@ -44,7 +44,7 @@ async function PartnerSales() {
 const initPartnerSales = () => {
   cron.schedule('0 9 * * 1', PartnerSales)
 
-  infoHandler('PartnerSales job initied')
+  logs.info('PartnerSales job initied')
 }
 
 module.exports = { initPartnerSales }

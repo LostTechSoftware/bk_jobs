@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { infoHandler } = require('../logs')
+const logs = require('../logs')
 
 const stagingConnection = mongoose.createConnection(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -8,7 +8,7 @@ const stagingConnection = mongoose.createConnection(process.env.MONGO_URL, {
   useCreateIndex: true,
 })
 
-infoHandler(`Banco de dados conectado: ${process.env.NODE_ENV === true ? 'Produção' : 'Staging'}`)
+logs.info(`Banco de dados conectado: ${process.env.NODE_ENV === true ? 'Produção' : 'Staging'}`)
 
 const productionConnection = mongoose.createConnection(process.env.MONGO_URL_PROD, {
   useNewUrlParser: true,
@@ -17,6 +17,6 @@ const productionConnection = mongoose.createConnection(process.env.MONGO_URL_PRO
   useCreateIndex: true,
 })
 
-infoHandler(`Banco de dados conectado: Produção`)
+logs.info(`Banco de dados conectado: Produção`)
 
 module.exports = { stagingConnection, productionConnection }
