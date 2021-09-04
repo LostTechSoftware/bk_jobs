@@ -6,7 +6,6 @@ const Holidays = require('date-holidays')
 const { Notification } = require('../../models/notifications')
 const { User } = require('../../models/user')
 const { Client } = require('../../models/clients')
-const { infoHandler } = require('../../logs')
 const logs = require('../../logs')
 const getRequestId = require('../../getRequestId')
 
@@ -16,7 +15,7 @@ const { BK_AI_URL, BK_AI_AUTHORIZATION } = process.env
 
 async function SendNotification() {
   try {
-    infoHandler('Sending notifications to users and clientes')
+    logs.info('Sending notifications to users and clientes')
 
     let temperature = ''
     const apiKey = '8b194f16a55f5e7fa875c570b8d74fd7'
