@@ -3,7 +3,7 @@ const { default: axios } = require('axios')
 const sgMail = require('@sendgrid/mail')
 const { Restaurant } = require('../../models/restaurant')
 const { PaymentFlows } = require('../../models/paymentFlow')
-const ErrorHandler = require('../../logs/errorHandler')
+const logs = require('../../logs')
 const couponMorePaymentEmail = require('../../templates/couponMorePaymentEmail')
 
 async function generateNewPayment(PartnerId, valueBody) {
@@ -65,7 +65,7 @@ async function generateNewPayment(PartnerId, valueBody) {
       }
     )
     .catch((err) => {
-      ErrorHandler(err.response.data)
+      logs.error(err.response.data)
     })
 
   const boleto = boletos.data

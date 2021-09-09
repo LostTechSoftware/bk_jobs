@@ -1,7 +1,6 @@
 const cron = require('node-cron')
 const { default: axios } = require('axios')
-const ErrorHandler = require('../../logs/errorHandler')
-const infoHandler = require('../../logs/infoHandler')
+const logs = require('../../logs')
 
 async function initializeScrapping() {
   try {
@@ -13,16 +12,16 @@ async function initializeScrapping() {
           : `https://bk-scrapping-staging.herokuapp.com/init`,
         { headers: { Authorization: BACKEND_AUTHORIZATION } }
       )
-      .catch((err) => ErrorHandler(err.response.data))
+      .catch((err) => logs.error(err.response.data))
   } catch (error) {
-    ErrorHandler(error)
+    logs.error(error)
   }
 }
 
 const initinitializeScrapping = () => {
   cron.schedule('0 3 * * *', initializeScrapping)
 
-  infoHandler('initializeScrapping job initied')
+  logs.info('initializeScrapping job initied')
 }
 
 module.exports = { initinitializeScrapping }
