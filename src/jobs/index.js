@@ -7,6 +7,7 @@ const { initProductCount } = require('./ProductCount')
 const { initProductSchedule } = require('./ProductSchedule')
 const { initResetBank } = require('./resetBank')
 const { initRevenueCity } = require('./RevenueCity')
+const { initSendNotification } = require('./SendNotification')
 const { initSendNotificationScheduled } = require('./SendNotificationScheduled')
 const { initStoryFunction } = require('./StoryFunction')
 
@@ -21,6 +22,8 @@ function initJobs() {
   initSendNotificationScheduled()
   initStoryFunction()
   initInitalizeModeration()
+  initSendNotification()
+  initPartnerSales()
   initinitializeScrapping()
   initPartnerSales()
 

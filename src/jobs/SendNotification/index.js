@@ -1,7 +1,6 @@
 const axios = require('axios')
 const moment = require('moment')
 const cron = require('node-cron')
-const Axios = require('axios')
 const Holidays = require('date-holidays')
 const { Notification } = require('../../models/notifications')
 const { User } = require('../../models/user')
@@ -20,9 +19,9 @@ async function SendNotification() {
     let temperature = ''
     const apiKey = '8b194f16a55f5e7fa875c570b8d74fd7'
 
-    const { data } = await Axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?q=Sao Paulo&appid=${apiKey}&units=metric`
-    ).catch((err) => logs.error(err.response.data))
+    const { data } = await axios
+      .get(`http://api.openweathermap.org/data/2.5/weather?q=Sao Paulo&appid=${apiKey}&units=metric`)
+      .catch((err) => logs.error(err.response.data))
 
     temperature = parseFloat(data.main.temp) + 7
 
@@ -174,7 +173,7 @@ async function SendNotification() {
 }
 
 const initSendNotification = () => {
-  cron.schedule('0 19 * * 3,5,0', SendNotification)
+  cron.schedule('0 22 * * 3,5,0', SendNotification)
 
   logs.info('SendNotification job initied')
 }
