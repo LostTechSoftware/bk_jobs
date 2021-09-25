@@ -10,14 +10,14 @@ const getRequestId = require('../../getRequestId')
 
 const hd = new Holidays('BR')
 
-const { BK_AI_URL, BK_AI_AUTHORIZATION } = process.env
+const { BK_AI_URL, BK_AI_AUTHORIZATION, WEATHER_API_KEY } = process.env
 
 async function SendNotification() {
   try {
     logs.info('Sending notifications to users and clientes')
 
     let temperature = ''
-    const apiKey = '8b194f16a55f5e7fa875c570b8d74fd7'
+    const apiKey = WEATHER_API_KEY
 
     const { data } = await axios
       .get(`http://api.openweathermap.org/data/2.5/weather?q=Sao Paulo&appid=${apiKey}&units=metric`)
