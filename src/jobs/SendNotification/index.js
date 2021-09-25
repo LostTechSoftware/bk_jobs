@@ -173,7 +173,7 @@ async function SendNotification() {
 }
 
 const initSendNotification = () => {
-  cron.schedule('0 19 * * 3,5,0', SendNotification)
+  cron.schedule('0 22 * * 3,5,0', SendNotification)
 
   logs.info('SendNotification job initied')
 }

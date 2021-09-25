@@ -3,7 +3,7 @@ const logs = require('../../logs')
 
 const SendPartnerSales = async (message) => {
   try {
-    await axios.post('https://hooks.slack.com/services/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', {
+    await axios.post(process.env.SLACK_PARTNER_SALES, {
       text: message,
     })
 
